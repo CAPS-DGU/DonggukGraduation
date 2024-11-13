@@ -397,14 +397,21 @@ class LectureIdentificationLectureGroupForCommonLectureGroupAPIView(views.APIVie
         return Response({"success": True, "data": None, "error": None})
 
 class GraduationCheckAPIView(views.APIView):
-
+    """
+    졸업요건 검사
+    """
     def post(self, request, *args, **kwargs):
         year = self.request.query_params.get('year')
         tech = self.request.query_params.get('tech')
-        excel_file = request.FILES.get('file')
+        excel_files = request.FILES.get('file')
         password = request.data.get('password', None)
 
-        if not excel_file.name.endswith('.xlsx'):
-            return JsonResponse({'error': 'File is not xlsx format'}, status=400)
-        
-        return Response({"success": True, "data": GraduationCheckService().check_graduation(year, tech, excel_file, password), "error": None})
+        results = []
+        for excel_file in excel_files:
+            if not excel_file.name.endswith('.xlsx'):
+                return JsonResponse({'error': f'{excel_file.name} is not xlsx format'}, status=400)
+
+            result = GraduationCheckService().check_graduation(year, tech, excel_file, password)
+            results.append(result)
+
+        return Response({"success": True, "data": results, "error": None})
