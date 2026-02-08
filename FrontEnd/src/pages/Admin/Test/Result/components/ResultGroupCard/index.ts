@@ -1,1 +1,0 @@
-export { ResultGroupCard } from './ResultGroupCard'

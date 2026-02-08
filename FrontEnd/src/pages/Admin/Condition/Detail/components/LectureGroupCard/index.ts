@@ -1,1 +1,0 @@
-export { LectureGroupCard } from './LectureGroupCard'

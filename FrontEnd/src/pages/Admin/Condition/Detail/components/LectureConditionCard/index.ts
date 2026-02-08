@@ -1,1 +1,0 @@
-export { LectureConditionCard } from './LectureConditionCard'

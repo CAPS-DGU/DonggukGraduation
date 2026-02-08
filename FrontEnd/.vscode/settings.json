@@ -1,5 +1,0 @@
-{
-  "editor.codeActionsOnSave": {
-    "source.removeUnusedImports": true
-  }
-}

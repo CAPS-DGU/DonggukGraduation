@@ -1,1 +1,0 @@
-export { SelectLectureItemNameModal } from './SelectLectureItemNameModal'

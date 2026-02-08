@@ -1,1 +1,0 @@
-export { ResultConditionCard } from './ResultConditionCard'

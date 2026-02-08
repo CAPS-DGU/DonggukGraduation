@@ -1,1 +1,0 @@
-export { LectureExcelPage } from './LectureExcelPage'
