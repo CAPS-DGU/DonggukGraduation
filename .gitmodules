@@ -1,3 +1,6 @@
 [submodule "BackEnd/Dongguk-Graduation-BE"]
 	path = BackEnd/Dongguk-Graduation-BE
 	url = https://github.com/CAPS-DGU/Dongguk-Graduation-BE.git
+[submodule "FrontEnd/Dongguk-Graduation-FE"]
+	path = FrontEnd/Dongguk-Graduation-FE
+	url = git@github.com:CAPS-DGU/Dongguk-Graduation-FE.git
