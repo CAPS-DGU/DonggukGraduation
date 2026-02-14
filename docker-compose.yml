@@ -1,0 +1,38 @@
+services:
+  # 1. Database
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: graduation
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 5
+
+  # 2. BackEnd
+  backend:
+    build: ./BackEnd/Dongguk-Graduation-BE
+    ports:
+      - "8080:8080"
+    # 내 컴퓨터의 코드 수정이 도커 컨테이너에 즉시 반영되게 함(Hot Reload)
+    volumes:
+      - ./BackEnd/Dongguk-Graduation-BE:/app
+      - /app/build # 빌드 폴더는 컨테이너 내부의 것을 사용하여 꼬임을 방지
+    depends_on:
+      db:
+        condition: service_healthy # DB가 완전히 켜진 후 백엔드를 실행
+
+  # 3. FrontEnd
+  frontend:
+    build: ./FrontEnd/Dongguk-Graduation-FE
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./FrontEnd/Dongguk-Graduation-FE:/app
+      - /app/node_modules # 호스트의 node_modules와 충돌 방지
+    depends_on:
+      - backend
