@@ -1,0 +1,12 @@
+# OS files
+.DS_Store
+Thumb.db
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+
+# Submodule local noise (optional but recommended)
+BackEnd/.DS_Store
+FrontEnd/.DS_Store
