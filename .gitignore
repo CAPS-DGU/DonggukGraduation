@@ -7,6 +7,13 @@ Thumb.db
 .vscode/
 *.iml
 
+# Secrets
+secrets.yaml
+secrets.properties
+.env
+.env.*
+!.env.example
+
 # Submodule local noise (optional but recommended)
 BackEnd/.DS_Store
 FrontEnd/.DS_Store

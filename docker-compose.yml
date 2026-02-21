@@ -4,12 +4,12 @@ services:
     image: mysql:8.0
     restart: always
     environment:
-      MYSQL_DATABASE: graduation
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
-      - "3306:3306"
+      - "${DB_PORT}:3306"
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}" ]
       timeout: 5s
       retries: 5
 
@@ -17,7 +17,7 @@ services:
   backend:
     build: ./BackEnd/Dongguk-Graduation-BE
     ports:
-      - "8080:8080"
+      - "${BACKEND_PORT}:8080"
     # 내 컴퓨터의 코드 수정이 도커 컨테이너에 즉시 반영되게 함(Hot Reload)
     volumes:
       - ./BackEnd/Dongguk-Graduation-BE:/app
@@ -30,7 +30,7 @@ services:
   frontend:
     build: ./FrontEnd/Dongguk-Graduation-FE
     ports:
-      - "5173:5173"
+      - "${FRONTEND_PORT}:5173"
     volumes:
       - ./FrontEnd/Dongguk-Graduation-FE:/app
       - /app/node_modules # 호스트의 node_modules와 충돌 방지
